@@ -11,6 +11,31 @@ body{
     text-align:center;
 }
 
+    header {
+        padding: 40px 20px 20px;
+        background: #111;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    nav {
+        margin-top: 15px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #333;
+        margin: 0 15px;
+        font-weight: bold;
+    }
+
+    nav a:hover {
+        color: #0077ff;
+    }
+
 /* Django messages (success, error, info) */
 .django-messages {
     list-style: none;
