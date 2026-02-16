@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Register
+{% endblock %}
+{% block content %}
+<div class="form-holder">
+    <form action="" method="post" class="register-form">
+        <h3>Create Account</h3>
+        {% csrf_token %}
+        {{form}}
+        <div class="btn-holder">
+            <button type="submit">Register</button>
+        </div>
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </form>
+</div>
+
+<script>
+    document.querySelector('.register-form').addEventListener('submit', ()=>{
+        document.querySelector('#id_username').value = document.querySelector('#id_username').value.toLowerCase();
+    })
+</script>
+{% endblock %}

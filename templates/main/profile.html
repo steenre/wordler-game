@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Profile {% endblock %}
+{% block content %}
+<div class="profile-container">
+    <h1>Profile</h1>
+    
+    <div class="profile-header">
+        <h2>Hello, {{ user.username }}!</h2>
+        <div class="total-score">
+            <span class="score-label">Total Score:</span>
+            <span class="score-value">{{ profile.score }}</span>
+        </div>
+    </div>
+
+    <div class="stats-section">
+        <h3>Statistics</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ total_games }}</div>
+                <div class="stat-label">Total Games</div>
+            </div>
+            <div class="stat-card won">
+                <div class="stat-value">{{ games_won }}</div>
+                <div class="stat-label">Games Won</div>
+            </div>
+            <div class="stat-card lost">
+                <div class="stat-value">{{ games_lost }}</div>
+                <div class="stat-label">Games Lost</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="recent-games-section">
+        <h3>Recent Games</h3>
+        {% if recent_games %}
+            <div class="games-list">
+                {% for game in recent_games %}
+                <div class="game-item {% if game.won %}won{% else %}lost{% endif %}">
+                    <div class="game-word">{{ game.word }}</div>
+                    <div class="game-details">
+                        <span class="game-attempts">{{ game.attempts }}/5 attempts</span>
+                        <span class="game-points">+{{ game.points }} pts</span>
+                        <span class="game-date">{{ game.created_at|date:"M d, Y" }}</span>
+                    </div>
+                    <div class="game-status">
+                        {% if game.won %}✓ Won{% else %}✗ Lost{% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-games">No games played yet. <a href="{% url 'game' %}">Start playing!</a></p>
+        {% endif %}
+    </div>
+
+    <div class="profile-actions">
+        <a href="{% url 'game' %}" class="btn-primary">Play Game</a>
+    </div>
+
+    <div class="leaderboard-section">
+        <h3>Leaderboard</h3>
+        {% if leaderboard %}
+        <div class="leaderboard-table">
+            <div class="leaderboard-header">
+                <span>#</span>
+                <span>Player</span>
+                <span>Score</span>
+            </div>
+            {% for entry in leaderboard %}
+            <div class="leaderboard-row {% if entry.user_id == user.id %}me{% endif %}">
+                <span class="leaderboard-rank">{{ forloop.counter }}</span>
+                <span class="leaderboard-name">
+                    {{ entry.user.username }}
+                    {% if entry.user_id == user.id %}<span class="you-pill">You</span>{% endif %}
+                </span>
+                <span class="leaderboard-score">{{ entry.score }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-games">No leaderboard data yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

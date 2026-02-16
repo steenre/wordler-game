@@ -1,0 +1,535 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+/* Django messages (success, error, info) */
+.django-messages {
+    list-style: none;
+    margin: 1rem auto 0;
+    padding: 0;
+    max-width: 480px;
+    width: 100%;
+}
+
+.django-messages .message {
+    margin-bottom: 0.6rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    text-align: left;
+    border: 1px solid transparent;
+}
+
+.django-messages .message.success {
+    background: rgba(46, 204, 113, 0.12);
+    border-color: #2ecc71;
+    color: #c8f7dc;
+}
+
+.django-messages .message.error {
+    background: rgba(231, 76, 60, 0.12);
+    border-color: #e74c3c;
+    color: #f9c0b8;
+}
+
+.django-messages .message.warning {
+    background: rgba(241, 196, 15, 0.12);
+    border-color: #f1c40f;
+    color: #fff3c4;
+}
+
+.django-messages .message.info,
+.django-messages .message.debug {
+    background: rgba(52, 152, 219, 0.12);
+    border-color: #3498db;
+    color: #d0e9ff;
+}
+
+/* Auth forms (login & register) */
+.form-holder {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.form-holder form {
+    background: #181818;
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+    border: 1px solid #262626;
+    text-align: left;
+}
+
+.form-holder form h3 {
+    margin: 0 0 1.5rem;
+    font-size: 1.6rem;
+    text-align: center;
+    letter-spacing: 0.03em;
+}
+
+.form-holder form p {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.form-holder form p a {
+    color: #2ecc71;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-holder form p a:hover {
+    text-decoration: underline;
+}
+
+/* Django form fields */
+.form-holder form .fields,
+.form-holder form ul,
+.form-holder form .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-holder form label {
+    font-size: 0.9rem;
+    margin-bottom: 0.15rem;
+    color: #e0e0e0;
+}
+
+/* Hide Django helptext under fields */
+.form-holder form .helptext,
+.form-holder form ul.helptext {
+    display: none;
+}
+
+.form-holder form input[type="text"],
+.form-holder form input[type="email"],
+.form-holder form input[type="password"] {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #101010;
+    color: #f5f5f5;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+.form-holder form input[type="text"]:focus,
+.form-holder form input[type="email"]:focus,
+.form-holder form input[type="password"]:focus {
+    border-color: #2ecc71;
+    box-shadow: 0 0 0 1px rgba(46, 204, 113, 0.4);
+    background: #141414;
+}
+
+.btn-holder {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-holder button {
+    width: 100%;
+    max-width: 260px;
+}
+
+.container {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#board {
+    display:grid;
+    grid-template-rows:repeat(4, 1fr);
+    gap:8px;
+    width:260px;
+    margin:20px auto;
+}
+
+.row {
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:6px;
+}
+
+.tile {
+    border:2px solid #444;
+    height:45px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.correct { background:#2ecc71; border:none; }
+.present { background:#f1c40f; border:none; color:black; }
+.wrong { background:#555; border:none; }
+
+button {
+    padding:10px 16px;
+    margin:6px;
+    font-size:16px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:disabled {
+    opacity:0.5;
+    cursor:not-allowed;
+}
+
+#alphabet {
+    width:90%;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:5px;
+}
+
+.key {
+    padding:8px;
+    border-radius:4px;
+    background:#333;
+}
+
+.key.correct { background:#2ecc71; }
+.key.present { background:#f1c40f; color:black; }
+.key.wrong { background:#555; }
+
+#score { margin-top:10px; }
+#message { margin-top:10px; }
+#meaningBox {
+    width:80%;
+    margin:15px auto;
+}
+
+.input-holder {
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:centre;
+gap:5px;
+}
+
+.input-holder input {
+outline:none;
+font-size:18px;
+text-align:center;
+padding:.5rem;
+}
+
+.game-container {
+    width: 300px;
+}
+
+/* Profile page styles */
+.profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: left;
+}
+
+.profile-header {
+    background: #181818;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid #262626;
+}
+
+.profile-header h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.total-score {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.score-label {
+    font-size: 1.1rem;
+    color: #b3b3b3;
+}
+
+.score-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+.stats-section {
+    margin-bottom: 2rem;
+}
+
+.stats-section h3,
+.recent-games-section h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: #181818;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid #262626;
+}
+
+.stat-card.won {
+    border-color: #2ecc71;
+}
+
+.stat-card.lost {
+    border-color: #e74c3c;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card.won .stat-value {
+    color: #2ecc71;
+}
+
+.stat-card.lost .stat-value {
+    color: #e74c3c;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+}
+
+.recent-games-section {
+    margin-bottom: 2rem;
+}
+
+.games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.game-item {
+    background: #181818;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #262626;
+    transition: border-color 0.2s ease;
+}
+
+.game-item.won {
+    border-color: #2ecc71;
+}
+
+.game-item.lost {
+    border-color: #555;
+}
+
+.game-word {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 0.1em;
+    min-width: 80px;
+}
+
+.game-details {
+    display: flex;
+    gap: 1.5rem;
+    flex: 1;
+    margin-left: 1rem;
+    color: #b3b3b3;
+    font-size: 0.9rem;
+}
+
+.game-points {
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+.game-status {
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.game-item.won .game-status {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.game-item.lost .game-status {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.no-games {
+    text-align: center;
+    color: #b3b3b3;
+    padding: 2rem;
+    background: #181818;
+    border-radius: 8px;
+    border: 1px solid #262626;
+}
+
+.no-games a {
+    color: #2ecc71;
+    text-decoration: none;
+}
+
+.no-games a:hover {
+    text-decoration: underline;
+}
+
+.profile-actions {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: #2ecc71;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #27ae60;
+}
+
+/* Leaderboard */
+.leaderboard-section {
+    margin-top: 3rem;
+}
+
+.leaderboard-section h3 {
+    margin-bottom: 1rem;
+}
+
+.leaderboard-table {
+    background: #181818;
+    border-radius: 10px;
+    border: 1px solid #262626;
+    overflow: hidden;
+}
+
+.leaderboard-header,
+.leaderboard-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 80px;
+    padding: 0.75rem 1.25rem;
+    align-items: center;
+}
+
+.leaderboard-header {
+    background: #141414;
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.leaderboard-row {
+    border-top: 1px solid #262626;
+    font-size: 0.95rem;
+}
+
+.leaderboard-row.me {
+    background: rgba(46, 204, 113, 0.08);
+}
+
+.leaderboard-rank {
+    font-weight: 600;
+    color: #b3b3b3;
+}
+
+.leaderboard-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.leaderboard-score {
+    text-align: right;
+    font-weight: 600;
+    color: #2ecc71;
+}
+
+.you-pill {
+    font-size: 0.75rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 999px;
+    background: #2ecc71;
+    color: #111;
+    text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+    .game-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .game-details {
+        margin-left: 0;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Login
+{% endblock %}
+{% block content %}
+<div class="form-holder">
+    <form action="" method="post" class="login-form">
+        <h3>Welcome Back</h3>
+        {% csrf_token %}
+        <div class="fields">
+            {{form}}
+        </div>
+        <div class="btn-holder">
+            <button type="submit" title="Click to proceed">Login</button>
+        </div>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    </form>
+</div>
+
+<script>
+    document.querySelector('.login-form').addEventListener('submit', ()=>{
+        document.querySelector('#id_username').value = document.querySelector('#id_username').value.toLowerCase();
+    })
+</script>
+{% endblock %}

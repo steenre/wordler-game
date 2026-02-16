@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Game {% endblock %}
+{% block content %}
+<div class="game-container">
+
+    <h1>Wordler</h1>
+
+    <div id="score">Score: 0</div>
+    <div id="board"></div>
+
+    <div class="input-holder" >
+        <input id="guessInput" maxlength="5">
+        <button onclick="submitGuess()">Guess</button>
+    </div>
+
+    <div>
+        <button id="meaningBtn" onclick="showMeaning()" disabled>Show Meaning</button>
+        <button id="restartBtn" onclick="restartGame()" disabled>Restart</button>
+    </div>
+
+    <div id="message"></div>
+    <div id="meaningBox"></div>
+
+    <div id="alphabet"></div>
+
+    </div>
+</div>
+<script>
+    // CSRF token for AJAX requests
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+    const isAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+    const userTotalScore = {{ user_score }};
+</script>
+<script src="{% static 'js/game.js' %}"></script>
+{% endblock %}
