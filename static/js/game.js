@@ -207,7 +207,7 @@ async function showMeaning(){
         let res=await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/"+answer.toLowerCase());
         let data=await res.json();
         let def=data[0].meanings[0].definitions[0].definition;
-        meaningBox.textContent=def;
+        meaningBox.textContent=`${answer} means ${def}`;
     }catch{
         meaningBox.textContent="Meaning not found";
     }
